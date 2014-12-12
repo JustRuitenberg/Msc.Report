@@ -1,0 +1,142 @@
+%!TEX root = ..\report.tex
+\color{tudelft-cyan}
+\chapter{Experimental set-up and procedure}
+\label{expset}
+\color{black}
+
+
+In this section the experimental setup will be explained as well as the measurement procedure suggested for the loophole-free Bell test. 
+
+
+\color{tudelft-cyan}
+\section{NV-centers in diamond as electron spin qubits}
+\color{black}
+The NV center in diamond consists of a nitrogen atom substituting a carbon atom in the diamond lattice and a neighboring lattice vacancy such as shown in Figure \ref{fig:NV}. The NV center can occur both in a neutral ($\mathrm{NV^0}$) and negatively charged ($\mathrm{NV^-}$) state. The negatively charged state hosts 6 electrons of which 3 originate from the dangling bonds of the neighboring carbon atoms, 2 originate as donor electrons from the nitrogen atom and 1 is captured from the environment.
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\linewidth]{./figs/NV}
+\caption{The NV center is shown in the diamond lattice.The carbon atoms are shown in blue, the substitutional nitrogen atom is shown in red and the lattice vacancy is shown in white.}
+\label{fig:NV}
+\end{figure}
+
+The NV center can be used as a qubit by exploiting the behavior of its electronic orbits using optical transitions and microwave pulses. The ground and first excited state, shown in Figure \ref{fig:elec}a, are located inside the band gap of the diamond and have, in the simplified model of non interacting electrons, both degenerate spin singlet and spin triplet states. 
+
+The Hamiltonian of the ground state is given by,
+\begin{equation}
+\centering
+H_{GS} = DS_{z}^2 + \gamma_e B \cdot S,
+\end{equation}
+where $S_i$ are the Pauli spin operators, $\gamma_e = 2.802 \mathrm{MHz/G}$ is the gyromagnetic ratio and $D$ gives the zero field splitting between the $m_s \mathrm{= \pm 1}$ and $m_s \mathrm{= 0}$ levels equaling approximately 2.88 GHz. From this, it follows that a magnetic field $B_z$ parallel to the NV-axis splits the  $m_s \mathrm{= \pm 1}$ states by the Zeeman effect as shown in Figure \ref{fig:elec}d. This enables selective transitions from $m_s \mathrm{= 1}$ or $m_s \mathrm{= - 1}$ to $m_s \mathrm{= 0}$  driven by microwaves with the frequency of the corresponding transition which allows us to define a qubit with $m_s \mathrm{= 0} \equiv \left| 0 \right>$ and  $m_s \mathrm{= 1} \lor m_s \mathrm{= -1} \equiv \left| 1 \right>$ .  The coherence time of these qubit states at low temperatures can extend beyond 10 ms for single NV-centers as the energy levels of the NV centers are well isolated from the bulk electronic states - they lie deep withing the large band gap of the diamond - and the diamond lattice consists up to 98.9 \% of spinless $\mathrm{^{12}C}$ which leads to slow dephasing from fluctuations in the nuclear spin bath \cite{bernien2013heralded}. 
+
+There is however a limit on the coherence time caused by magnetic impurities in the diamond which form a spin bath creating a fluctuating magnetic field at the NV center. This fluctuating magnetic field subsequently leads to the dephasing of the qubit. 
+
+\begin{figure}[h!]\centering 
+\includegraphics[width=\linewidth]{./figs/electroniclevelsNV}
+\caption{a) Either resonant excitation to the $^3E$ level or off-resonant excitation to higher quick decaying levels in the phonon side band (PSB) can be reached from the ground state triplet, denoted by $^3A_2$. b) Zero field splitting splits the ground state into one $m_s = 0$ state and two degenerate $m_s = \pm1$ states. The excited state is split into four levels of which two are doubly degenerate due to spin-spin and spin-orbit splitting. c) Lateral strain (or an electric field) shifts the exvited state levels into increasingly mixed states. d) The $m_s = \pm 1$ levels in the ground state can be split by the Zeeman effect when a magnetic field is applied.}
+\label{fig:elec}
+\end{figure}
+
+As mentioned above, the NV center can be exploited  as a qubit using optical transitions. Figure \ref{fig:elec}a shows that the NV center can be excited either resonantly (637 nm) or off resonantly. When the NV center is excited off resonantly, a phonon level above the excited state will be populated. This is followed by a quick non radiative decay into $\mathrm{^3E}$ from which a radiative decay follows into the ground state, either directly, using the zero phonon line (ZPL) or indirectly via a phonon level above the ground state using the phonon side band (PSB).  
+
+\begin{figure}[h!]\centering 
+\includegraphics[width=\linewidth]{./figs/spectrum}
+\caption{a) We see a schematic of the optical and microwave transitions possible from the $m_s = 0$ and $m_s = \pm 1$ levels. The purple arrow indicate that microwave pulses can be used to go from one state to the other. The straight bright and dark red arrow show that respectively the $m_s = 0$ and $m_s = \pm 1$ can be excited followed by either decay back into the $m_s = 0$ and $m_s = \pm 1$   or shelving into $m_s = \pm 1$ and $m_s = 0$ levels (dashed lines). b) The photoluminescence excitation spectrum of a NV-center shows the different transitions shown in Figure \ref{fig:elec}. The frequency is given relative to 470.443 THz.   }
+\label{fig:spectrum}
+\end{figure}
+
+There are multiple options for resonant excitation since the excited state triplet is split into six states due to spin-orbit and spin-spin interaction, see Figure \ref{fig:elec}b. The states $E_{1,2}$ and $E_{x,y}$ are doubly degenerate. The latter state has $m_s \mathrm{= 0}$, whereas all other states consist of a superposition of $m_s \mathrm{= 1}$ and $m_s \mathrm{= -1}$. Transitions between the ground an excited states are enabled by the emission or absorption of linearly or circularly polarized photons. A selection table can be found in table 2.1 in reference \cite{Bernien2014thesis}.
+
+Lateral strain on the NV-center can shift the excited states as shown in Figure \ref{fig:elec}c. This effect can also be achieved by applying an electric field perpendicular to the NV-axis as it breaks the $C_{3\nu}$ splitting and thus changes the splitting between the levels.  
+
+The levels described above typically result in a spectrum as shown in Figure \ref{fig:spectrum}b. This spectrum can be used to initialize the NV-center in either $m_s \mathrm{= 0}$ or $m_s \mathrm{= \pm 1}$. In Figure \ref{fig:spectrum}a we see that following on resonant excitation, the NV-center can decay fluorescently into the other spin state. In this way, it has been shown that by means of optical pumping states can be initialized with a preparation error of $\mathrm{0.3 \pm 0.1 \%}$ \cite{robledo2011high}.
+
+
+\color{tudelft-cyan}
+\section{Heralded entanglement between two separated NV-centers in diamond}
+\color{black}
+\label{entanglement}
+Heralded entanglement between two spin qubits in diamonds that are separated by a distance of three meters has been shown in \cite{bernien2013heralded}. This experiment consists of six steps. 
+
+First, optical spin pumping is used to bring both NV centers in the $\left| \uparrow \right> $ state which is defined by $m_s \mathrm{= 0}$. ($\left| \downarrow \right> $ is defined as $m_s \mathrm{= -1}$)
+
+Second, a microwave pulse prepares both NV centers in a $ \frac{1}{\sqrt{2}} \left( \left| \uparrow \right> + \left| \downarrow \right> \right)$ superposition.
+
+Third, by exciting the NV centers with a short laser pulse resonant with the transition from $\left| \uparrow \right> $ to the optically excited state $\left| e \right>$ - whose spin projection equals the spin projection of $\left| \uparrow \right> $ - both qubits are entangled with the photon number such that resulting state is given by,
+\begin{equation}
+\frac{1}{\sqrt{2}} \left( \left| \uparrow 1 \right> + \left| \downarrow 0 \right> \right),
+\end{equation}
+where 1(0) corresponds with the presence (absence) of an emitted photon. The photons from both NV centers are directed to the input ports of a beamsplitter such that it is not clear if photons arriving at the detectors originate from one NV center or the other. One photon arriving at the detector therefore projects the qubits onto the maximally entangled state $\left| \psi \right> = \frac{1}{\sqrt{2}} \left( \left| \uparrow_A \downarrow_B \right> \pm e^{-i\phi}\left| \uparrow_B \downarrow_A \right>\right)$ . However, due to photon loss and imperfect detector efficiency one photon arriving at the detector could also correspond with the $\left| \uparrow \uparrow \right>$ state. 
+
+The goal of the fourth step is overcoming this ambiguity. In order to do so the qubit is flipped and excited again. This enables us to filter the $\left| \uparrow \uparrow \right>$ states out, by only selecting events with one click in both rounds for further measurements. The second round of the protocol also reverts optical path dependent phases such that the setup only has to be interferometrically stable for the time between the two optical excitations.  A third advantage of this step is that the flipping works as a refocusing mechanism that counteracts spin dephasing during the process.
+
+The fifth step is preparing the qubit for measurement. In the experiment presented by Bernien et. al, the qubit was measured in three different basis combinations but any number of combinations is possible. A measurement basis for a single NV-center is selected by rotating the qubit a predefined angle using a microwave pulse. 
+
+The sixth and final step consist of single shot spin readout as described by Robledo et al. in \cite{robledo2011high}. By exciting the  $\left| \uparrow \right>$ state resonantly and detecting the emitted photons in the phonon side band, it can be determined if a qubit is in either the  $\left| \uparrow \right>$ or  $\left| \downarrow \right>$ state. Readout fidelities have been reported up to 96.3  $\pm$ 0.5\% \cite{pfaff2014unconditional}.
+
+\color{tudelft-cyan}
+\section{Bell's test and and the CHSH inequality}
+\color{black}
+\label{BellCHSH}
+Performing a Bell test using NV centers in diamond is the main goal of the research presented in this report. In this section we will therefore briefly introduce Bell's inequality  and the more measurable CHSH-inequality. 
+
+In his derivation, Bell starts by describing the experiment suggested by Aharanov and Bohm which elaborates on the EPR paradox \cite{bohm1957discussion}. This experiment considers two spin one-half particles, $\vec{\sigma_1}$ and $\vec{\sigma_2}$ , in a singlet spin state traveling in opposite direction. According to this experiment, the measurement of the $\vec{a}$ component of the first particle, $\vec{\sigma_1} \cdot \vec{a}$ where $\vec{a}$ is an arbitrary unit vector, determines the outcome of the second measurement $\vec{\sigma_2} \cdot \vec{a}$. Aharanov and Bohm suggested that the cause of this effect was given by hidden variables. Aharanov, Bohm and Bell considered only perfectly correlated particles such that when $\vec{\sigma_1} \cdot \vec{a} = 1$, $\vec{\sigma_2} \cdot \vec{a}$ should equal -1. 
+
+In order to contradict the hidden variable theory suggested by Aharanov and Bohm, Bell introduced two functions that determine the outcome of measurements, $A\left( \vec{a}, \lambda \right)$ and $B\left( \vec{b}, \lambda \right)$, depending on the hidden variable $\lambda$ . Note that $\lambda$ can denote a single variable, a set of variables or a set of functions. Also they can both be discrete and continuous. Apart from that,  $A\left( \vec{a}, \lambda \right)$ and $B\left( \vec{b}, \lambda \right)$ should both equal $\pm 1$ in order to obey the perfect correlation condition.
+
+From quantum mechanics we know that the expectation value of the product of two components,  $\vec{\sigma_1} \cdot \vec{a}$ and  $\vec{\sigma_2} \cdot \vec{b}$, is given by, 
+\begin{equation}
+P\left(\vec{a},\vec{b}\right) = - \vec{a} \cdot \vec{b}.
+\end{equation}
+For the hidden variable theory to hold this should equal to, 
+\begin{equation}
+P\left(\vec{a},\vec{b}\right) = \int \rho ( \lambda) A\left( \vec{a}, \lambda \right) B\left( \vec{b}, \lambda \right) d\lambda,
+\end{equation}
+where $\rho(\lambda)$ is the probability density for the hidden variable. Using simple mathematics (for a derivation see reference \cite{bell1964on} and \cite{griffiths1995introduction}) Bell found the following inequality, 
+\begin{equation}
+\left|P\left(\vec{a},\vec{b}\right) - P\left(\vec{a},\vec{c}\right)\right| \leq 1 + P\left(\vec{b},\vec{c}\right)
+\end{equation}
+and showed it does not hold for statistical prediction following from quantum mechanics. In this way, Bell showed that any hidden variable theory does still allow "spooky action at a distance" and that our world is thus nonlocal. 
+
+This theoretical contradiction had to be  confirmed experimentally. However, the assumption of perfect correlation is difficult if not impossible to reach experimentally. Therefore, Clauser, Horne, Shimony and Holt (CHSH) extended Bell's inequality for the non-ideal case by assuming $\left|A\left( \vec{a}, \lambda \right)\right| \leq 1$ and $\left|B\left( \vec{b}, \lambda \right)\right| \leq 1$. Simple mathematics led them to,
+\begin{equation}
+\label{eq:CHSH}
+\left|E\left(\vec{a},\vec{b}\right) - E\left(\vec{a},\vec{b'}\right)\right| + \left|E\left(\vec{a'},\vec{b}\right) - E\left(\vec{a'},\vec{b'}\right)\right| \leq 2, 
+\end{equation}
+where $a$, $a'$, $b$ and $b'$ give different measurement bases and $E$ stand for the expectation value of the measurements. From now onwards, the left part of equation \ref{eq:CHSH} shall be referred to as the CHSH value.
+
+It has been shown by Boris Tsirelson that for quantum mechanical systems CHSH values can be found up to $2\sqrt{2}$, hereby violating the CHSH-inequality \cite{cirel1980quantum}. The CHSH-inequality has been used in many experiments (see section \ref{intro}) to show nonlocal behavior. 
+
+The CHSH-inequality in an experiment using qubits made from NV-centers in diamond can be build up as follows. The bases $a$, $a'$ are defined at Alice's side and the bases $b$ and $b'$ are defined at Bob's side. After heralded entanglement, a random bit generator defines in which basis the qubit is measured and thus which predefined rotation is invoked upon the qubit. Subsequently, the qubit is readout as described in section \ref{entanglement} and the values for the CHSH inequality are determined by,
+\begin{equation}
+\label{Eab}
+E(a,b) = p_{\uparrow \uparrow} -p_{\downarrow \uparrow} - p_{\uparrow \downarrow} + p_{\downarrow \downarrow}, 
+\end{equation}
+where $p_{\uparrow \uparrow}$ is defined as, 
+\begin{equation}
+\label{pfromn}
+p_{\uparrow \uparrow} = \frac{N_{\uparrow \uparrow}}{N_{\uparrow \uparrow}+ N_{\downarrow \uparrow}+ N_{\uparrow \downarrow}+ N_{\downarrow \downarrow}},
+\end{equation}
+in which $N_{xx}$ gives the amount of detected photon combinations corresponding to the state $xx$. 
+
+\color{tudelft-cyan}
+\section{The loophole free Bell test}
+\color{black}
+The goal of a loophole free Bell test is closing the loopholes that could allow for a local realistic model to explain the measured data. In this section we describe these loopholes and show how we intend to overcome them using NV centers in diamond. 
+
+The locality loophole states that Alice (Bob) cannot "know" in which basis Bob (Alice) is measured and cannot be influenced by Bob (Alice) during the measurement. Therefore, the distance, $L$, between two qubits, Alice and Bob,  should exceed the distance light can travel in the time, $T$, that it takes to perform a measurement on either Alice or Bob and the measurement basis of both qubits should be randomly selected shortly before the measurement such that no information on this selection can reach the other setup before the measurement is completed. NV centers in diamond emerge as a candidate to overcome the locality loophole for three reasons. First, the spin of the qubits in diamond can be readout in less than $\mathrm{10 \: \mu s}$. This allows a spatial separation between Alice and Bob of under three kilometers and is thus feasible for an experiment. Second, the time-bin spin-photon entanglement used in previous experiments is robust to transportation over long distances through the optical fibers necessary to connect Alice and Bob. Third, random measurement basis selection can easily be achieved using the protocol described in section \ref{BellCHSH}.
+
+In order to perform the experiment, two setups separated by 1.3 kilometers have been build. Therefore, the speed of the single shot readout had to be increased while retaining high readout fidelity. This has been achieved by increasing the power of the laser and improving the optical collection efficiency by enlarging the trenches of the solid immersion lenses and the addition of an anti-reflection coating.
+
+Apart from the improvement mentioned above more improvements are necessary as the two set-ups are connected through optical fibers that have  attenuations resulting in a decrease of the detection efficiency and thus in a lower success rate for entanglement generation. The relative increase of detector dark counts can decrease the readout fidelity. 
+
+In order to close the detection loophole, the added probability of all measurement outcomes of Alice and Bob should sum to one. For two arbitrary measurement bases $X$ and $Y$ this requirement is given by, 
+\begin{equation}
+p_{\uparrow \uparrow}\left( X, Y \right) + p_{\uparrow \downarrow}\left( X, Y \right) + p_{\downarrow \uparrow}\left( X, Y \right) + p_{\downarrow \downarrow}\left( X, Y \right) = 1.
+\end{equation}
+This means that a measurement value should be assigned to every particle in a detector of either Alice or Bob and thus means that the detection efficiency should be exceeded by a certain threshold value. If not all events are measured one could namely argue that the subset of the detected events might agree with quantum mechanics but that the full set of events satisfies Bell's inequalities. 
+
+Matter qubits can approach measurement outcome probabilities near 1 and are thus able to overcome the detection loophole \cite{rowe2001experimental}. In addition, it has recently been demonstrated that readout fidelities of entangled nuclear spin qubits in diamonds are high enough to close the detection loophole by violating Bell's inequality with this system \cite{pfaff2013demonstration}.
+
+The third and final loophole is the freedom of choice loophole. This loophole can be overcome by making sure that the choice of basis used for the local measurement is uncorrelated to anything. This can be reached by choosing the bases for the local measurement randomly.
+
+For the experiment suggested here, the freedom of choice loophole can be overcome by generating a (quantum-) random bit with a commercially available random number generator that is used to perform a pre-programmed basis rotation on the NV center.

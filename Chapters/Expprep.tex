@@ -1,0 +1,443 @@
+%!TEX root = ..\report.tex
+\color{tudelft-cyan}
+\chapter{Experimental preparations}
+\color{black}
+
+
+\label{intro}
+
+%\addcontentsline{toc}{section}{Introduction} % Adds this section to the table of contents
+
+
+
+
+\color{tudelft-cyan}
+\section{Splice optimization}
+\color{black}
+
+In the previous section it has been shown that the CHSH-inequality can be violated with current measurement techniques. It however remains important that the attenuation through the fibers connecting the two separated set-ups is low to ensure low fake entanglement probability and reasonable measurement times. Additionally, it is important that the photons arriving at the beamsplitter have the same polarization such that high interference visibility can be achieved. Therefore, either a polarization maintaining fiber should be used or a non polarization maintaining fiber should be spliced to a polarizer. 
+
+The fiber-bundle between the two measurement set-ups consist of 11 fibers; six infrared fibers, two polarization maintaining fibers, two SM600 fibers, and one J-fiber. 
+
+Unfortunately, the fiber couplers had to be removed such that fiber could be installed between the two laboratories. After the installation the fiber therefore had to be spliced to the optical fiber again. In order to do this, we have used an Ericsson FSU 995PM fusion splicer. 
+
+In this section first the theoretical background on optical fibers and fiber splicing will be given after which we will show the characterization of the fusion splicer followed by a presentation of the losses measured in the different fibers. 
+
+\color{tudelft-cyan}
+\subsection{Theoretical background}
+\color{black}
+An essential part of the experiment presented here is the transport of light through optical fibers. Most fibers consist of a core, a cladding and a jacket for protection. The core works as a waveguide for the light sent into the fiber and makes use of the difference in refractive index between core and cladding to trap the light.  In Figure \ref{fig:fiberschem} we see a schematic of the fiber core and cladding and Figure \ref{fig:coordinates} shows the coordinate system we use in our description. Translational symmetry in time $t$ and distance $z$ make it possible to describe the electric field, $\vec{E}(r,\phi,z,t)$, and the magnetic field, $\vec{H}(r,\phi,z,t)$ by, 
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\linewidth]{./figs/fiberschem}
+\caption{A schematic of an optical fiber is shown. In blue we see the protection jacket, the dark grey area is the fiber cladding and the lighter grey area is the fiber core. The index of refraction is given for the latter two.}
+\label{fig:fiberschem}
+\end{figure}
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\linewidth]{./figs/coordinatesfiber}
+\caption{The coordinate system used for the description of the optical fibers is shown. Image from \cite{thevenaz2011advanced}}
+\label{fig:coordinates}
+\end{figure}
+
+\begin{equation}
+\left[ \begin{matrix} 
+\vec{E}(r,\phi,z,t)  \\
+\vec{H}(r,\phi,z,t)  
+\end{matrix} \right] = \left[ 
+\begin{matrix} 
+\vec{E}_0(\phi,z,t)  \\
+\vec{H}_0(\phi,z,t)  
+\end{matrix} 
+\right] e^{\left[j\left(\omega t-\beta(\omega z\right)\right]},
+\end{equation} 
+where $\omega$ is the angular optical frequency and $\beta$ is the wavenumber. It has been shown that solutions for which the electromagnetic field vanishes for large $r$ can be found using Maxwell's equations with appropriate boundary conditions. Then, for a specific optical frequency there is a discrete number of solutions, referred to as modes $m = 1,2,3,...$, which only transport power in the $z$ direction and are characterized by the wavenumber $\beta_m$ and a corresponding unique spatial distribution $\vec{E}_0^m(r,\phi)$ and $\vec{H}_0^m(r,\phi)$.  
+\newline
+\\*
+{\color{color1}\textbf{The spatial distribution of the amplitude in a single mode optical fiber}}
+\\*
+\newline
+The unique spatial distributions of the amplitude of the electromagnetic fields can be found by using the scalar wave equation and the assumption that separation of variables $R(r)$ and $\Phi(\phi)$ can be used on $\vec{E}_0^m(r,\phi)$  and $\vec{H}_0^m(r,\phi)$. This results in the following differential equation:
+\begin{equation}
+%\begin{align}
+\frac{r^2}{R}\left( \frac{d^2R}{dr^2} + \frac{1}{r} \frac{dR}{dr} \right) + r^2 \left[ n^2(r)k_0^2 -\beta^2 \right]  \\
+= - \frac{1}{\phi} \frac{d^2\Phi}{d\phi^2} = l^2,
+%\end{align}
+\end{equation}
+where $l$ is constant, $n(r) = n_{core} \mathrm{\; for \;} 0 < r < a \; \& \; n_{clad} \mathrm{\;for\;} r >a$ and $k_0 = \frac{\omega}{c}$. 
+This equation can be solved for $l = 0,1,2,3...$ and will yield a solution in the form, 
+\begin{equation}
+R(r)e^{j\left(\omega t - \beta ( \omega) z\right)} \left[ \begin{matrix}
+cos \left( l \phi \right) \\
+sin \left( l \phi \right) 
+\end{matrix} \right].\end{equation} We assume that the fibers used here are weakly guiding which means that $\frac{n_{core}^2 -n_{clad}^2}{n_{core}^2} \ll 1$. Combining this with the condition for $n(r)$ described above yields two different Bessel functions for $0<r<a$ and $r>a$. Using the Bessel functions the normalized wave guide parameter $V$ can be defined by $ V = k_0 a \sqrt{n_{core}^2 - n_{clad}^2}$. 
+This wave guide parameter determines the number of solutions, $m$, to the Bessel functions which are finite in number and are defined as $LP_{lm}$, where $m$ refers to mth solution. The derivation of these solutions is beyond the scope of this report but can be found in section 8.3 of reference \cite{ghatak1998introduction}.
+
+Optical fibers can be divided into two categories:fibers that support only a single mode and fibers that support multiple modes. Single mode fibers have only one guided mode which depends on the wave guide parameter of the fiber. For an increasing wave guide parameter, the number of modes will increase as well from $LP_{01}$ onwards. A single mode fiber will therefore always only have the $LP_{01}$ solution which is $\phi$ independent and allows two independent states of polarization; therefore, it has a twofold degeneracy. The spatial distribution of the amplitude of the $LP_{01}$ solution is shown in Figure \ref{fig:LP01}.
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\linewidth]{./figs/LP01}
+\caption{The spatial distribution of the amplitude of the $LP_{01}$ mode as a function of x and y (in microns) for a fibercore of $4.15 \: \mathrm{\mu m}$ and a waveguide parameter of 4.4. The min/max values of the surface correspond to the min/max annotated values on the vertical amplitude axis. Image from \cite{thevenaz2011advanced}}
+\label{fig:LP01}
+\end{figure}
+%\\*
+{\raggedright\color{color1}\textbf{The $\mathbf{LP_{01}}$ solution}}
+%\\*
+%\newline
+The $LP_{01}$ solution has some interesting properties of which the most relevant are mentioned below. 
+
+\begin{enumerate}
+\item{Up to 25\% of the power travels through the cladding but there is no flow of power perpendicular to the axis of syymmetry. Fiber-optic components such as couplers make use of this property.}
+\item{For a given geometry and refractive index profile, the penetration depth into the cladding increases with decreasing $\lambda$ due to diffraction of the guided mode.}
+\item{Bending loss can be minimized by directing the power through the core as much as possible.}
+\item{Using a Gaussian distribution to approximate the radial distribution of the power, the mode field diameter (MFD) of a fiber can be determined. The MFD is determined as the diameter at which the power is reduced to $\frac{1}{e^2}$ of its maximum at the fiber center. Typical MFD's for fibers used in this research are $4 \: \mathrm{\mu m}$. This can result in very high light intensities (watts/$m^2$) which give rise to nonlinear effects such as; the Kerr effect, where the refractive index is slightly affected by the light propagating in the fiber; the Raman effect, where light is inelastically scattered both forwards and backwards by interaction with vibrational and rotational transitions in the bonds between first-order neighboring atoms and is downshifted in frequency by $\approx$ 12 THz and the Brillouin effect, where light is inelastically backscattered by low-frequency phonons and downshifted in frequency by $\approx$ 10.5 GHz.} 
+\end{enumerate}
+%\\*
+{\raggedright\color{color1}\textbf{Power, dispersion and polarization loss in optical fibers}}
+%\\*
+%\newline
+Transport through optical fibers with very low attenuation is possible for some frequencies in the infrared domain. For other frequencies such as those in the visible spectrum the loss however is significant. Loss in fibers is either due to contaminants or due to electronic and molecular absorptions and scattering. Fabrication techniques of fibers have improved to such extent that only the latter is of real importance to the fibers used in this experiment. This also explains why the loss is frequency dependent. 
+
+In addition to loss, chromatic dispersion can also have a negative influence on signals transported through optical fibers. Chromatic dispersion refers to the fact that various optical frequencies may have different propagation properties, resulting in the distortion of the waveform. Fortunately, the ZPL transported through the optical fibers in this experiment originates from an direct decay between two electronic levels and therefore has a very narrow peak in the frequency domain such that chromatic dispersion does not have a big influence.
+
+The $LP_{01}$ mode guides two polarization modes which are degenerate if the circular symmetry of the fiber is perfect. In practice, this cannot be realized resulting in different propagation constants for different polarization modes which results in birefringence such that $n_x \not= n_y$.
+
+We can distinguish two types of fibers: fibers that have a uniform birefringence across the entire length of the fiber and fibers that have varying birefringence across their length.  In the uniformly birefringent fibers one can calculate the delay of one polarization with regards to the other making it possible to define a length for which the state of polarization of the light coming out of the fiber equals the state of polarization going in to the fiber. This length, called the beat length ranges typically between 1 and 50 meters. 
+
+For fibers where the birefringence varies along the fiber length, the fiber can be regarded as a series of uniformly birefringent fibers. The local birefringence of one part of the series introduces a phase delay between the two polarization eigenmodes which are then projected onto the two eigenmodes of the next one. This polarization-mode coupling results, for weak birefringence, in pulse broadening  also referred to as polarization mode dispersion (PMD) which can have both a negative and positive influence on the signal going out of the fiber. The positive influence occurs when the phase delay of one part of the series compensates for the phase delay of another part of the series resulting in a net phase delay of zero and thus in lower PMD. The negative influence is given by the fact  that it is not possible to predict the polarization of the outgoing light. Concluding, birefringence in optical fibers, both in the uniform and in the non-uniform case, results in a change of the polarization of the ingoing light which is predictable for the uniform variant and unpredictable for the non-uniform variant. 
+
+ Birefringence in optical fibers can have several causes viz non-circular cores, the presence of stress in the fiber, bending of the fiber, the presence of a transverse electric field, twisting of the fiber and the presence of a longitudinal magnetic field. 
+
+However, fibers that maintain polarization can be fabricated. By using stress to  introduce strong linear birefringence originating from circular asymmetry, fibers with just one polarization eigenmode are made. In this way, the polarization of this eigenmode will be conserved over the length of the fiber.  Also, the beat length of these fibers is in the order of mm such that the polarization is maintained even when the fiber is bent or twisted. \newline
+\\*
+{\raggedright\color{color1}\textbf{Estimation of the splice loss}}
+\\*
+\newline
+The splice loss is determined by how well the power profiles of the fibers that are spliced together overlap. A Gaussian approximation can be used to fit the power profile and can be used to approximate the splice loss by considering longitudinal, transverse and angular misalignment shown in Figure \ref{fig:aerror}.
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\linewidth]{./figs/alignmenterr}
+\caption{a) The longitudinal misalignment error. The fibers are separated by a distance $D$. b) The transverse misalignment error. The fiber cores are shifted by a distance $u$. c) The angular misalignment error. The optical fibers are rotated under an angle $\theta$}
+\label{fig:aerror}
+\end{figure}
+
+
+The Gaussian modes can be represented as, 
+\begin{equation}
+\psi(x,y) = \left(\frac{2}{\pi}\right)^{1/2} \frac{1}{w}e^{-\left(x^2 + y^2\right)/w^2},
+\end{equation}
+where $w$ gives the spot size (MFD) of the single mode. In order to calculate the loss due to transverse misalignment, first the transmitted power is calculated by,
+\begin{equation}
+T = \left| \int_{- \infty}^{+\infty}\int_{- \infty}^{+\infty} \psi_1 \psi_2^* dxdy \right|^2,
+\end{equation}
+where the $x$ or $y$ is coordinate of $\psi_2$ is shifted by $u$ to include the transverse misalignment. Since most fibers spliced in this experiment have the same spot size we can assume $w_1 =w_2$ resulting in, 
+\begin{equation}
+T = e^{-u^2/w^2}.
+\end{equation}
+ Using this transmitted power the loss is found to be, 
+\begin{equation}
+\alpha_t(\mathrm{dB}) = 4.34 \left( \frac{u}{w} \right)^2
+\end{equation}
+With this formula it can be shown that in order to reach a loss lower than 0.1 dB for a fiber with a spotsize of 4 $\mathrm{\mu m}$ the maximum transverse misalignment is 0.3 $\mathrm{\mu m}$.
+
+Analog to the above reasoning it can be found that angular mismatching leads to a loss given by, 
+\begin{equation}
+\alpha_a(\mathrm{dB}) = 4.34 \left( \frac{\pi n_l w \theta}{\lambda_0}\right)^2, 
+\end{equation}
+where $n_l$ is the refractive index of the medium between the fiber ends, $\lambda_0$ is the free space wavelength and $\theta$ is measured in radians. Using $n_l = 1.4569$ for fused silica and $\lambda_0 = 637 nm$ and a spot size of $4 \: \mathrm{\mu m}$ we find that for a loss lower than 0.1 dB the angular misalignment cannot exceed $0.30 ^o$. 
+
+Loss due to longitudinal misalignment can be calculated by, 
+\begin{equation}
+\alpha_l(\mathrm{dB}) = \mathrm{10log}\left( 1 + ~D \right)^2,
+\end{equation}
+with $~D = \frac{D \lambda_0}{2 \pi n_l w^2}$. Using the correct settings of the Ericsson FSU 995 PM fusion splices D will be zero such that we have not made an estimate of this errors. 
+
+Note that while the transverse misalignment error decreases for larger spotsizes the angular misalignment errors increases. Since the errors are given in dB they can be added to find the optimum spotsize. 
+
+\color{tudelft-cyan}
+\subsection{Characterization of the Ericsson FSU 995PM fusion splicer}
+\color{black}
+In order to characterize the Ericcson FSU 995PM fusion splicer we have repeated the same procedure for several different fiber types. A fiber with a length of approximately two to three meters is coupled to a laser on one side and to a Thorlabs PM100D power meter on the other side. In this way a reference measurement can be carried out. All measurements are carried out for 30 s and the average value was used in combination with the standard deviation to calculate errors.
+
+After the reference measurement is carried out, the fiber is broken in two parts these are inserted in fiber holders in such a way that six centimeters of fiber protrude from the fiber holder. The fiber claddings are subsequently stripped using an Ericsson EFS 10 automatic heat stripper. After stripping, the fiber is cleaned thoroughly with propanol and is cleaved using an Ericsson EFC-11 fiber cleaver. 
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\linewidth]{./figs/VAGA}
+\caption{a) The view angle is shown. Counter clockwise angles ($\alpha_{\mathrm{left}}$ and $\beta_{\mathrm{left}}$) are measured as positive while ($\alpha_{\mathrm{right}}$ and $\beta_{\mathrm{right}}$) clockwise angles are measured as negative. b) the gap angle is shown as $\alpha$}
+\label{fig:VAGA}
+\end{figure}
+
+After the preparation, the actual splicing can start by placing the fiber holders in the fusion splicer. A predefined program is selected and the machine will start the splicing automatically. First, it shows the gap angle and the view angle which are both of influence on the splice quality. 
+
+The view angle is shown in Figure \ref{fig:VAGA}a and gives the angle with which the fiber protrudes from the fiber holder. This angle is dependent on the way the fiber is stored - the stress of the storage can have an influence on the angle of a fiber - and on the way the fiber is put in the holder. The gap angle is shown in Figure \ref{fig:VAGA}b and is the angle that the end of the fiber has after cleaving. It is not clear what factor has the most influence on the gap angle is but it is suspected that the length of the fiber part protruding from the fiber holder and the view angle are both important.
+
+After the splicing, the fusion splicer gives an estimation of the splicing loss. A measurement of power through the fiber is again carried out analog to the reference measurement and the splicing loss can be calculated using the following formula, 
+\begin{equation}
+\mathrm{Splice \: loss \left(dB\right)} = 10\mathrm{ log_{10}} \frac{P_{T1}}{P_{T2}}
+\end{equation}, 
+where $P_{T1}$ is transmitted power before the splice and $P_{T2}$ is the transmitted power after the splice. 
+
+We have measured the loss for different fiber types and several splices and compared it to the estimated loss. We found that when the mode field diameter of the fiber is overestimated by the splicer the loss of the splice is underestimated and vice versa. Apart from that, we have searched correlation between the quality of the splice and the gap or view angles.
+
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\linewidth]{./figs/MaxGA}
+\caption{The measured losses of the splices are shown. The red squares and purple diamond show the measured losses for a J-fiber and the green triangles show the measured losses for the SM600 fiber. The inset shows a zoom on the region with maximum gap angles from $0^o$ to $0.4^o$ and loss values from up to $0.1 \mathrm{dB}$.}
+\label{fig:maxga}
+\end{figure}
+ 
+For normal non polarization maintaining fibers, the data in Figure \ref{fig:maxga} shows that splices with a maximum gap angle of 0.4 have an acceptable loss ($< 0.1 \: \mathrm{dB}$). The inset shows that no clear trend is visible for the splices with maximum gap angles lower that 0.4. No other correlations were found for normal fibers. The importance of the maximum gap angle can be understood as the splicing process applies an electric arc on the  fiber ends and hereby fuses them together. One can imagine that for higher gap angles the distance between the parts of the fiber that have to be fused together differ which can result in a less homogeneous and therefore lower quality splice. Apart from that, the gap angle can lead to transverse misalignment.
+
+\begin{figure}\centering
+		\subfigure[Power Loss vs. Maximum Gap Angle for HB600 fiber]{\label{fig:MaxGAPM}\includegraphics{./figs/MaxGAPM}}
+         ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+           %(or a blank line to force the subfigure onto a new line)
+         \subfigure[Power Loss vs. view angles squared and added for HB 600 fiber]{\includegraphics[width=\textwidth]{./figs/VAPM}
+                   \label{fig:VAPM}}
+         ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+           %(or a blank line to force the subfigure onto a new line)
+          \caption{The characterization of the HB600 fiber is shown. No correlation between the measured loss and the maximum gap angle is observed and a possible correlation between the view angles squared and added and the measured loss is found.}\label{fig:animals}
+
+\end{figure}
+
+% \begin{figure}[h!]\centering
+% 		\begin{subfigure}[b]{\linewidth}
+%                  \includegraphics[width=\textwidth]{./figs/MaxGAPM}
+%                  \caption{Power Loss vs. Maximum Gap Angle for HB600 fiber}
+%                  \label{fig:MaxGAPM}
+%          \end{subfigure} %
+%          ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+%            %(or a blank line to force the subfigure onto a new line)
+%          \begin{subfigure}[b]{\linewidth}
+%                  \includegraphics[width=\textwidth]{./figs/VAPM}
+%                  \caption{Power Loss vs. view angles squared and added for HB 600 fiber}
+%                  \label{fig:VAPM}
+%          \end{subfigure}
+%          ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+%            %(or a blank line to force the subfigure onto a new line)
+%           \caption{The characterization of the HB600 fiber is shown. No correlation between the measured loss and the maximum gap angle is observed and a possible correlation between the view angles squared and added and the measured loss is found.}\label{fig:animals}
+
+% \end{figure}
+
+For polarization maintaining fibers the process mentioned above has been repeated. In this case however, before the fusion, the splicer determines the polarization profile of both fibers, rotate the fibers in such a way that the polarization profiles match. After the fusion the splicer measures both profiles again an recalculates how well they match. In this way an estimate of the extinction ratio is given. The estimated extinction ratio for all splices shown here is larger than 30 dB.  
+
+The maximum gap angle case does not correlate with the splice quality for the polarization maintaining fiber, as shown in Figure \ref{fig:MaxGAPM}. The only possible correlation is shown in Figure \ref{fig:VAPM}, viz a correlation between the view angles of the fibers squared and added. This could be explained by the fact the fiber now has to rotate such that view angles make the fiber end alignment worse for both the transverse and angular alignment. It should be noted that the amount of data points for polarization maintaining fibers is very limited such that any conclusions are still open for discussion.
+
+Splicing different types of polarization maintaining fibers, i.e. panda fibers to bow-tie fibers, has proven to be difficult. We therefore suggest that one fiber type is chosen for an experiment with which all fibers are compatible. 
+
+Finally, the splicer has many options to fine tune splices. It is however beyond the scope of this report to mention them all and to mention which are used for different splices and why. For the interested reader we refer to the FSU 995 PM User's manual. 
+
+\color{tudelft-cyan}
+\subsection{Total fiber attenuation and degree of polarization}
+\color{black}
+It is important to know the total fiber attenuation between both measurement setups and the beamsplitter station.  In order to calculate the loss due to the splice, the in- and output power should be measured. Measuring the input power is challenging. If the laser is sent into the fiber by fiber-fiber coupling, the coupling loss should be taken into account. The coupling loss depends on a variety of factors such as the MFD of both fibers, the cleanliness of the fiber ends and the refractive indexes of the fiber cores and claddings. The coupling loss is difficult to estimate and we have therefore tried to estimate this loss experimentally. This resulted in an average fiber coupling loss of 1.93 dB with a standard deviation of 1.71 dB. When the laser is sent into the fiber directly from the laser, the laser to fiber coupling has to be taken into account. This done by coupling the laser into a reference fiber, optimizing the coupling and measuring the output power. This output power is subsequently compared to the optimized power coming out of the fiber between the measurement setups. 
+
+The power loss is calculated using,
+\begin{equation}
+\mathrm{Attenuation \:  Loss  (dB)} = 10 \mathrm{log_{10}} \frac{P_i}{P_t},
+\end{equation}
+in which $P_i$ denotes the input power and $P_t$ denotes the transmitted power. This loss is compared with the attenuation measured in the 11 different fibers before installation. 
+
+\begin{table}[hbt]
+\caption{Total fiber attenuation TN to EWI}
+\label{tab:TNEWI}
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Fiber & Measured Loss (dB) & Expected Loss (dB) \\ \hline
+SM 1300 & $5.5 \pm 0.008$  & 5.0 \\ \hline
+SM 1300 & $7.3 \pm 0.085$  & 4.2 \\ \hline
+SM 1300 & $8.7 \pm 0.063$  & 4.0 \\ \hline
+SM 1300 & $5.7 \pm 0.024$  & 4.0 \\ \hline
+SM 1300 & $6.1 \pm 0.022$  & 3.9 \\ \hline
+SM 1300 & N.A. & N.A. \\ \hline
+SM 600 & $9.3 \pm 0.011$  & 9.0 \\ \hline
+SM 600 & $8.1 \pm 0.010$  & 8.3 \\ \hline
+J-fiber & $5.4 \pm 0.009 $  & 4.8 \\ \hline
+HB 600 & $14.4 \pm 0.024$  & 11.0 \\ \hline
+HB 600 & $13.5 \pm 0.020$ & 10.7 \\ \hline
+\end{tabular}
+\end{table}
+
+Table \ref{tab:TNEWI} shows the measured losses  and expected losses from TN to EWI and is measured using fiber to fiber coupling. Values in the table do not take coupling loss into account. It shows that the values measured for the two SM600 fibers and the J-fiber correspond well with the expected loss. The measured loss of the HB-600 fibers exceeds the expected loss which can probably be explained by the coupling loss. It could however be interesting to check for defects using Optical Time Domain Reflection (OTDR, see section \ref{OTDR}). Finally, we see that for the SM-1300 fibers the losses in general surpass the expected losses.The fiber-fiber coupling could cause this extra loss. Note that both the measured loss and expected loss are based on measurement using 637 nm light such that we cannot assume single mode operation. Although it would be interesting to check these fibers using OTDR it is not as necessary because they will mainly be used for communication using infrared signals.
+
+\begin{table}[hbt]
+\caption{Total fiber attenuation RID to EWI}
+\label{tab:RIDEWI}
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Fiber & Measured Loss (dB) & Expected Loss (dB) \\ \hline
+SM 1300 & $11.8 \pm 0.003$  & 5.9 \\ \hline
+SM 1300 & $11.7 \pm 0.003$  & 5.9 \\ \hline
+SM 1300 & $11.8 \pm 0.003$  & 5.9 \\ \hline
+SM 1300 & $11.6 \pm 0.003$  & 5.9 \\ \hline
+SM 1300 & $11.6 \pm 0.003$  & 5.9 \\ \hline
+SM 1300 & N.A. & N.A. \\ \hline
+SM 600 & $15.3 \pm 0.007$  & 14.5 \\ \hline
+SM 600 & $15.8 \pm 0.011$  & 14.5 \\ \hline
+J-fiber & $9.7 $  & 7.2 \\ \hline
+HB 600 & $19.7 \pm 0.008$  & 18.7 \\ \hline
+HB 600 & not measured  & not measured \\ \hline
+\end{tabular}
+\end{table}
+
+In Table \ref{tab:RIDEWI} we see the measured and expected losses between the measurement setup at the RID and EWI. This loss is measured using laser-fiber coupling and takes this coupling loss into account. We see that for all SM-1300 fibers the attenuation is twice the expected value. Since all values show approximately the same value it seems reasonable to expect the same defect for all fibers. This hypothesis thus excludes splice losses. It is therefore important to check these fibers using OTDR. The SM-600 and HB-600 fibers are in reasonable agreement with the expected values while the J-fiber exceed the expected loss. Since the J-fiber is the most important fiber for the experiment is very important to do OTDR on this fiber and check what the origin of the error is.
+
+
+Finally, we have checked if the J-fiber maintains its polarization using a Thorlabs TXP polarimeter. The degree of polarization coming out of the fiber at EWI is near 100 \% and the polarization remain stable over time periods of approximately 30 minutes. Therefore, the fibers should be coupled to polarization rejectors which have to be aligned with the polarization coming out of the fiber every 30 minutes.
+
+\color{tudelft-cyan}
+\section{Maximal CHSH violation by optimizing the measurement bases}
+\color{black}
+To achieve maximal violation of the CHSH-inequality, we research if measurement bases can be optimized with respect to entanglement visibility, the probability of fake entanglement events and the readout fidelity. 
+
+We start by making a discretion between fake and real entanglement events. Fake entanglement events can originate from dark counts and residual laser photons. In table \ref{tab:entantable} we show which possibilities there are that result in an entanglement event and with which states they correspond. Heralded entanglement events due to two dark counts are omitted from the table as the probability of such an event occurring is negligible. From the  table we can conclude that a fake entanglement event leaves the qubit in a completely mixed state.
+\begin{table}[hbt]
+\caption{Entanglement table}
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Detector signal & Detector signal & Corresponding States \\ \hline
+Real Count & Real Count & $\uparrow \downarrow, \downarrow \uparrow$ \\ \hline
+Dark Count & Real Count & $\uparrow \downarrow, \downarrow \uparrow, \downarrow \downarrow$ \\ \hline
+Real Count & Dark Count & $\uparrow \downarrow, \downarrow \uparrow, \uparrow \uparrow$ \\ \hline
+\end{tabular}
+\label{tab:entantable}
+\end{table}
+
+
+The real entanglement events can be divided partially in events due to indistinguishable photons and partially in events due to distinguishable photons. The first leaves the qubit in a maximally entangled state while the latter leaves the qubit in a mixed state between $\uparrow \downarrow$ and $\downarrow \uparrow$. 
+
+The density matrix used for the simulation is given by, 
+\begin{equation}
+%\begin{align}
+\rho = \left(1-P_{fe}\right) \left(\frac{V}{2} \left(\begin{matrix} 
+0 & 0 & 0 & 0  \\
+0 & 1 & 1 & 0  \\
+0 & 1 & 1 & 0  \\
+0 & 0 & 0 & 0   \\
+\end{matrix} \right) +  \\ \frac{1-V}{2} \left( \begin{matrix} 
+0 & 0 & 0 & 0  \\
+0 & 1 & 0 & 0  \\
+0 & 0 & 1 & 0  \\
+0 & 0 & 0 & 0   \\
+\end{matrix} \right)\right) \\ + 
+\frac{P_{fe}}{4} \left(\begin{matrix} 
+1 & 0 & 0 & 0  \\
+0 & 1 & 0 & 0  \\
+0 & 0 & 1 & 0  \\
+0 & 0 & 0 & 1   \\
+\end{matrix} \right),
+%\end{align}
+\end{equation} 
+where V gives the visibility of the entanglement and $P_{fe}$ gives the probability of a fake entanglement event. 
+
+The qubit is numerically rotated to a selected measurement basis by applying the following rotation matrix, 
+\begin{equation}
+\left( \begin{matrix}
+cos \alpha & -sin \alpha \\
+sin \alpha & cos \alpha
+\end{matrix} \right) \otimes
+\left( \begin{matrix}
+cos \beta & -sin \beta \\
+sin \beta & cos \beta
+\end{matrix} \right),
+\end{equation} 
+where $\alpha$ determines the rotation of Alice and $\beta$ determines the rotation of Bob.  
+
+Then, the diagonal positions are used to define the vector $\vec{N} = \left(N_{\uparrow \uparrow}, N_{\downarrow \uparrow} , N_{\uparrow \downarrow} ,N_{\downarrow \downarrow}\right)^T $. 
+
+We simulate non-perfect readout by taking the matrix product of a readout matrix with the vector $\vec{N}$. The readout matrix is given by, 
+\begin{equation}
+\left( \begin{matrix}
+F_{\uparrow} & (1-F_{\uparrow}) \\
+(1-F_{\uparrow}) & F_{\downarrow}
+\end{matrix} \right) \otimes
+\left( \begin{matrix}
+G_{\uparrow} & (1-G_{\uparrow}) \\
+(1-G_{\uparrow}) & G_{\downarrow}
+\end{matrix} \right),
+\end{equation}
+where, $F_\uparrow$ and $F_\downarrow$ give the readout fidelity of the $\uparrow$ and $\downarrow$ state of Alice respectively. $G_\uparrow$ and $G_\downarrow$ give the same readout fidelities for Bob. 
+
+Subsequently we use equation \ref{pfromn} and \ref{Eab} to find the CHSH value.
+
+\begin{figure}[h!]\centering
+\subfigure[Optimized Measurement Basis]{\includegraphics[width=\textwidth]{./figs/2014-06-24_t14-58-00_CHSH_val_vs_D_dc_F0G0_eq0dot95_F1G1_eq0dot995}
+                 \label{fig:CHSHop}}\\ %
+         ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+           %(or a blank line to force the subfigure onto a new line)
+         \subfigure[Non-Optimized Measurement Basis]{\includegraphics[width=\textwidth]{./figs/2014-06-24_t14-58-00_CHSH_val_non_op_vs_D_dc_F0G0_eq0dot95_F1G1_eq0dot995}
+                 \label{fig:CHSHnonop}
+         }
+         ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+           %(or a blank line to force the subfigure onto a new line)
+          \caption{Contour plots of the CHSH values vs. $P_{fe}$ and V are shown. A red line indicates from which values onwards the CHSH-inequality is violated. The red line is observed at lower visibilities for optimized measurement bases. $F_\downarrow, G_\downarrow = 0.95$ $F_\uparrow, G_\uparrow = 0.995$ }\label{fig:CHSHopnonop}
+
+\end{figure}
+
+In order to see if optimization of the measurement bases with respect to fake entanglement events and visibility has any effect, the CHSH value is plotted for both non-optimized, Figure \ref{fig:CHSHnonop}, and optimized measurement bases, Figure \ref{fig:CHSHop}. From these images it can be concluded that measurement basis optimization enables the CHSH-inequality violation threshold to lie 10 \% lower in visibility.
+
+During the optimization, measurement base $a$ is set constant while $a'$, $b$ and $b'$ are varied to reach a maximal violation of the CHSH-inequality. From the simulations performed,  it can be concluded that the measurement bases can be optimized for different interference visibilities but not for fake entanglement events. It should be noted that this is only checked on scale relevant for the experiment. It is therefore not ruled out that measurement bases can be optimized with respect to fake entanglement probability completely. 
+
+\begin{figure}[h!]\centering
+\includegraphics[width=\linewidth]{./figs/Angles}
+\caption{This figure schematically depict the different optimized measurement angles found in the simulation. The black vectors indicate the angles for a visibility of 100 \% and no fake entanglement probability. The orange vectors indicate the shift that occurs for lower visibilities.}
+\label{fig:anglebehaviorschem}
+\end{figure}
+
+The behavior of the angles that followed from the simulations is shown schematically in Figure \ref{fig:anglebehaviorschem}. Normally, for maximal violation of the CHSH inequality $a$, $a'$, $b$ and $b'$ are set to $0^o$, $45^o$, $22.5^o$ and $67,5^o$ respectively. From Figure \ref{fig:anglebehaviorschem} it can be seen that now $b = -22.5^o$ and $b' = 22.5^o$. This means that the differences between the measurement bases is equal to the differences for the original Bell angles except for $\left|a'-b\right|$ and $\left|a-b'\right|$ which are interchanged. From equation \ref{Eab} it is clear that the relation between two measurement bases is an interesting parameter. Therefore, this behavior is explored further such as shown in Figure \ref{fig:anglebehavior} and ref{fig:anglebehaviorschem}. 
+
+\begin{figure*}[!htb]\centering
+		\subfigure[$\left| a - b\right| \mathrm{vs.P_{fe} (y-axis) \: and \: V (x-axis)}$]{
+                 \includegraphics[width=0.45\textwidth]{./figs/2014-06-24_t14-58-00_Dif_a_b_vs_D_dc_F0G0_eq0dot95_F1G1_eq0dot995}
+                 \label{fig:gull}
+         } %
+         ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+           %(or a blank line to force the subfigure onto a new line)
+         \subfigure[$\left| a' - b'\right| \mathrm{vs.P_{fe} (y-axis) \: and \: V (x-axis)}$]{
+                 \includegraphics[width=0.45\textwidth]{./figs/2014-06-24_t14-58-00_Dif_a_prime_b_prime_vs_D_dc_F0G0_eq0dot95_F1G1_eq0dot995}
+                 \label{fig:tiger}
+         } \\
+         ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+           %(or a blank line to force the subfigure onto a new line)
+		\subfigure[$\left| a - b'\right| \mathrm{vs.P_{fe} (y-axis) \: and \: V (x-axis)}$]{
+                 \includegraphics[width=0.45\textwidth]{./figs/2014-06-24_t14-58-00_Dif_a_b_prime_vs_D_dc_F0G0_eq0dot95_F1G1_eq0dot995}
+                 \label{fig:gull}
+         } %
+         ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+           %(or a blank line to force the subfigure onto a new line)
+         \subfigure[$\left| a' - b\right| \mathrm{vs.P_{fe} (y-axis) \: and \: V (x-axis)}$]{
+                 \includegraphics[width=0.45\textwidth]{./figs/2014-06-24_t14-58-00_Dif_a_prime_b_vs_D_dc_F0G0_eq0dot95_F1G1_eq0dot995}
+                 \label{fig:tiger}
+		}					
+          \caption{From the simulation shown here it can be concluded that $\left|a-b'\right|$ and $\left|a'-b\right|$ decrease for decreasing visibility while $\left|a'-b'\right|$ and $\left|a-b\right|$ increase for decreasing visibility.   $\left|a-b'\right|$, $\left|a'-b\right|$,$\left|a'-b'\right|$ and $\left|a-b\right|$ do not change with respect to the fake entanglement probability.}\label{fig:anglebehavior}
+
+\end{figure*}
+
+We know that measurement base $a$ and $a'$ are kept constant while $b'$ and $b$ shift for decreasing visibility. $b$ and $b'$ shift in such as way that $\left|a-b'\right|$ and $\left|a'-b\right|$ decrease for decreasing visibility while $\left|a'-b'\right|$ and $\left|a-b\right|$ increase for decreasing visibility. It would be interesting to link this behavior to a physical process relating to the visibility. Unfortunately, this is not trivial and has therefore not yet been found. 
+
+\begin{figure*}[!htb]\centering
+		\subfigure[Measurement bases optimized for changing readout fidelities]{
+                 \includegraphics[width=0.45\textwidth]{./figs/24-06-2014_15-36-33_Ang_pure_vs_F0G0_D_eq0dot2_dc_eq0dot033_F1G1_eq1dot0}
+                 \label{fig:ROfidtest}
+         } %
+         ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+           %(or a blank line to force the subfigure onto a new line)
+         \subfigure[CHSH values of pure and non pure state for different readout fidelities]{
+                 \includegraphics[width=0.45\textwidth]{./figs/24-06-2014_15-36-33_CHSH_vs_F0G0_D_eq0dot2_dc_eq0dot033_F1G1_eq1dot0}
+                 \label{fig:ROfidvsCHSH}
+		}
+         ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+           %(or a blank line to force the subfigure onto a new line)
+          \caption{a) The different optimized measurement bases are plotted for a pure state. $F_\downarrow$ and $G_\downarrow$ are kept constant on 1, while $F_\uparrow$ and $G_\uparrow$ are varied. In pink we see the CHSH value corresponding with the measurement bases. The dotted lines give the minimum and maximum CHSH violation. We see that the measurement bases do not change with respect to the changing readout fidelity b) The plot is analog to a but now a pure state is plotted in blue and a non pure state (V = 80 \% and $P_{dc}$ = 3.3\%) is plotted in green. We see that a violation of the CHSH-inequality is within the range of the current readout fidelity and that maximum violation cannot be achieved for nonpure states.} \label{fig:animals}
+
+\end{figure*}
+
+Finally, we have tested if the measurement bases can be optimized with respect to the readout fidelity and what the effect of non-ideal readout fidelity is on pure and on non-pure states. In Figure \ref{fig:ROfidtest} we see that measurement bases cannot be optimized with respect to the readout fidelity. This can be explained by the measurement scheme described above. Since the qubits are rotated into the measurement bases prior to the readout the measurement bases obviously cannot compensate for non-perfect readout. Figure \ref{fig:ROfidvsCHSH} shows the response of the CHSH-value to varying readout fidelity for a pure (blue) and non-pure (green) state. It can be concluded that the the behavior of both the pure and non-pure state is equal but that the CHSH value for non-pure states shifts down. In addition, we conclude that the CHSH-inequality can be violated for both the pure and non-pure states for readout fidelities that can be reached within the current experiment.
+
+
+\color{tudelft-cyan}
+\section{Adressing the freedom of choice loophole}
+\color{black}

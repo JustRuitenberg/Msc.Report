@@ -1,0 +1,60 @@
+\documentclass{tudelft-report}
+
+
+\usepackage{newtxtext}
+\usepackage{graphicx, subfigure}
+\usepackage{caption}
+\usepackage{amsmath}
+%\usepackage{subcaption}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{hyperref}
+%\usepackage{sectsty}
+
+\definecolor{tudelft-cyan}{cmyk}{.89,.58,.48,0.30}
+\definecolor{color1}{RGB}{0,0,90} % Color of the article title and sections
+\definecolor{color2}{RGB}{0,20,20} % Color of the boxes behind the abstract and headings
+%\partfont{\color{tudelft-cyan}}
+%\chapterfont{\color{tudelft-cyan}}
+%\sectionfont{\color{tudelft-cyan}}
+
+\begin{document}
+
+%% Use Roman numerals for the page numbers of the title pages and table of
+%% contents.
+\frontmatter
+
+\title[On measurement basis optimization, Fusion Splicing, Data Processing and Random Numbers]{Towards a loophole free Bell test using Nitrogen-Vacancy Centers in Diamond}
+\author{J.W.\ Ruitenberg}
+\affiliation{Technische Universiteit Delft}
+\coverimage{cover.jpg}
+%\makecover
+
+%% Include an optional title page.
+\input{title}
+
+
+\tableofcontents
+
+%% Use Arabic numerals for the page numbers of the chapters.
+\mainmatter
+
+\input{./chapters/Intro.tex}
+\input{./chapters/Belltestloopholes.tex}
+\input{./chapters/Expset.tex}
+\input{./chapters/Expprep.tex}
+\input{./chapters/Data_an.tex}
+\input{./chapters/conc_out.tex}
+
+%% Use letters for the chapter numbers of the appendices.
+\appendix
+
+%\input{appendix-a}
+
+\phantomsection
+\bibliographystyle{unsrt}
+\bibliography{Master}
+
+\end{document}
+

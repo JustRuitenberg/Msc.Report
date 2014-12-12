@@ -1,0 +1,130 @@
+%!TEX root = ..\report.tex
+\color{tudelft-cyan}
+\chapter{Data Analysis and Data filtering}
+\color{black}
+
+Wrongful data analysis can erode the goal of the experiment presented in this report by closing the detection or freedom of choice loophole. Therefore, this chapter will give a detailed description of how the raw data is gathered, how it is post processed and finally how we apply filters on the data without opening any loopholes. Also, we show how parts of the analysis code are used to better understand the experiment. Note that much of the work presented in this chapter builds on earlier work done by Dr. W. Pfaff.
+
+
+\color{tudelft-cyan}
+\section{Initial data gathering}
+\color{black}
+As described in the Chapter \ref{expset}, data is gathered at the two low temperature (LT) laboratories (Alice \& Bob) and at the beam splitter station. 
+
+\begin{figure}[ht]\centering
+\includegraphics[width=0.8\linewidth]{./figs/data_gath}
+\caption{The acquiring of data is schematically shown for both the LT set-ups and the BS-sation. The LT set-ups make use of PicoQuant TimeHarp devices. As shown in the Figure a sync signal is linked to a sync channel, the avalanche photo detector (APD) is linked to channel 0 and the signal that is given when a new random number is generated is linked to channel 1. The output of the random number generator is linked to marker channels 1 and 2, where channel 1 gives a 0 and channel 2 gives a 1. The entanglement marker arrives at marker 4. The BS-station makes use of a PicoQuant HydraHarp. In this case, two APD's are connected to channel 0 and channel 1 and the entanglement marker arrives on marker channel 1. Data acquired in both the TimeHarp and HydraHarp devices is sent to an internal memory referred to as the FIFO (First In First Out). The internal memory is accessed by a personal computer (PC) and the data is subsequently processed and saved in to an HDF5 file (see section \ref{data_saving} for more information on HDF5 files)}
+\label{fig:SSRO_data_gath}
+\end{figure}
+At the LT laboratories a PicoQuant TimeHarp 260 is used for data processing. This is a Time-Correlated Single Photon counting (TCSPC) device meaning that it is used to detect clicks coming from an APD. The TimeHarp 260 has three channels with a temporal resolution of 1 ns. Two of these can be used to detect photons and one is used to detect sync signals as described in Chapter \ref{expset}. Additionally, there are four channels, specified temporal resolution of 100 ns, that can be used to implement external markers such as the entanglement marker described in Chapter \ref{expset}. Note that although the specified temporal resolution is 100 ns, the actual temporal resolution lies between 10 and 20 ns.  
+
+The BS laboratory makes used of a PicoQuant HydraHarp 400. This is a TCSPC device as well but differs from the TimeHarp because of its 3 channels with a temporal resolution of 1 ps. Again, one of these channels is meant for the sync signal. 
+
+In order to save the data into analyzable files, the data that is acquired through both the Time- and HydraHarp has to be post processed. The allocation of devices to channels and the post-processing procedure are schematically shown in Figure \ref{fig:SSRO_data_gath}.
+
+At the LT laboratories the APD is linked to channel 0 of the TimeHarp. Channel 1 is used for the signal that is generated  when a new random number is produced. The value of this random number is subsequently saved in marker channels 1 and 2, where marker channel 1 corresponds to a 0 and marker channel 2 corresponds to a 1. The entanglement marker arrives on Marker channel 4. 
+
+At the BS station the two APD's are linked to channel 0 and 1 and the entanglement marker is connected to Marker channel 1. 
+
+For every signal arriving at either the Time- or HydraHarp, the absolute time with respect to the start of the measurement and the arrival channel is saved. In order to make a distinction between ''normal" and marker channels, an extra variable, the special parameter, is introduced. It is 0 when a signal arrives at a ''normal" channel and it is 1 otherwise. The data is encoded in 32 bit numbers and is sent to the internal memory of the PicoQuant devices. We refer to this internal memory as the FIFO (First In First Out). 
+
+\begin{figure}[ht]\centering
+\includegraphics[width=0.8\linewidth]{./figs/signal_overview}
+\caption{This picture shows schematically how the raw data from the FIFO is transformed into data that can be saved. The x-axis of the graph is the time-axis and on the y-axis different channels are defined. The colored circles are signals arriving at the Time- and HydraHarp and the dotted lines show their time stamp. Signals arriving on the sync channel are defined with letters and all other signals are numbered. The data processing works in the following way. The program checks the sync signals that arrive and save their absolute time. Subsequently, it checks if other signals have arrived before the next sync signal has arrived. If this is not the case, as it is for sync signal b, all information is removed except for the sync number which counts how many sync signals have arrived. If there are events such as for sync signals a and c. The sync time is defined by subtracting the absolute time of the sync signal from the absolute time of the event signal. The complete data extraction for all events is shown in the table below the graph.}
+\label{fig:signal_overview}
+\end{figure}
+The FIFO is emptied continuously while measuring. 1000 data points are removed from the FIFO every time it is accessed. This data is decoded as follows. The first bit (from the left) gives the special  parameter and the second to seventh bits give the channel number. The remainder of the bits give the information about the arrival time of the signal. When there are more than 1000 data points in the FIFO when it is accessed, a warning is given since errors can occur when the FIFO is not emptied fast enough. These errors occur when new data arrives at a completely full FIFO. This data will get lost and the dataset cannot be trusted anymore. Therefore, the measurement is stopped when this happens. 
+
+Using this raw data; the sync time, sync number, special parameter, channel number and absolute time of every event are defined. How these parameters are defined is graphically shown in Figure \ref{fig:signal_overview} and explained in its caption. These 5 parameters contain all information necessary for subsequent data analysis and are therefore saved. 
+
+\color{tudelft-cyan}
+\subsection{Data Saving}
+\label{data_saving}
+\color{black}
+During one 40 minute measurement run of the Bell experiment up to 50 GB of data can be generated. In order to save this data efficiently and to make it available for fast data analysis, we make use of HDF5. HDF5 is an hierarchical data format designed to store and organize large heterogeneous numerical datasets.  Data organization is arranged for by using groups in the HDF5 file. Groups are container structures which can hold datasets, multidimensional arrays of numerical data, and other groups for further organization. 
+
+HDF5 has many interesting features for data storage but we will only treat the ones used in this experiment. For more information we refer to reference \cite{collette2013python}. HDF5 allows fast data saving because it is not necessary to load the complete dataset into the memory of the Personal Computer (PC) before writing it to the disk. Chunks of data can be saved and by fast resizing of the HDF5 dataset new data is added. Additionally, HDF5 allows fast type conversion on the fly such that all data is saved in a correct manner without having to specify it before saving. 
+
+In order to allow fast data analysis the data sets that are saved have a maximum length of 10 million events. When the number of events exceeds 10 million, a new dataset is created. Note that we create separate data sets for every saved parameter.
+
+A final feature of HDF5 that is used extensively in this research is the use of attributes. Attributes are pieces of metadata that can be attached to any object in an HDF5 file. Here they are used to save all the set-up specific instrument settings as well as the joint parameters that are used. 
+
+After two days of measurements, it became clear that the entanglement markers worked in a correct manner such that saving only data points around the entanglement markers was sufficient. Hereby, decreasing the data size with a factor of 20 thousand. 
+
+\color{tudelft-cyan}
+\section{Data Analysis}
+\label{data_analysis}
+\color{black}
+After the measurements are done three main raw data files exist, one for the LT3 laboratory, one for the LT4 laboratory and one for the BS-station. From these files we want to construct a table with all information necessary for the construction of the CHSH-parameter and filtering. This is done in two steps; first, the interesting events are filtered from the LT3 and LT4 data files and saved in separate data files. Then, these files are combined with the raw BS-station data to create one table with columns that enable us to do the data analysis and data filtering. 
+
+\color{tudelft-cyan}
+\subsection{Extracting interesting events from (large) data files}
+\label{large_data_files}
+\color{black}
+Before live filtering was implemented, the raw data files created in one run at the LT laboratories had sizes up to 25 GB and contained over one billion data points. The number of entanglement markers that are sent in one run normally ranges between 1 and 15. This means that out of over one billion 15 events have to be selected. Here we describe how this can be done quickly. Note that although the scripts used for this filtering were written explicitly for large data files, they work and are used on the filtered data files as well.
+
+The goal of the script is to create a new file with all data with entanglement markers as well as the data of the events just before and just after the entanglement marker arrives. In practice this means that if an entanglement marker arrives with sync number 8, we save all data with sync numbers 7,8 and 9. How we do this is schematically shown in Figure \ref{fig:analysis_overview}.
+
+\begin{figure}[ht]\centering
+\includegraphics[width=\linewidth]{./figs/Analysis_LT}
+\caption{bladibla}
+\label{fig:analysis_overview}
+\end{figure}
+First, we check how many datasets are saved for a particular measurement. This can be done fast by using the so called keys in HDF5. The keys of an HDF5 file are the names of the groups and data sets in the file. By looping through the names we quickly find the total number of datasets. 
+
+Now that this number is determined, the wanted data can be retrieved by looping over all the datasets. For every dataset, a boolean filter for the marked events is created. A boolean filter in Python is an array with the same dimensions as the data it is applied on consisting of boolean values. An element in the array is True if the corresponding element in the dataset satisfies certain conditions and it is False otherwise. By applying a Boolean filter on a dataset, only the values in the data set for which the filter has a True value remain. Boolean filters are useful tools in the analysis of large datasets as they are very fast compared to for example for loops. 
+
+In order to make a boolean filter for all marked events in a dataset, the special and channel dataset have to be loaded completely. Since they consist of 10 million element this is one of the most memory-consuming and slow processes in the script. The boolean filter is then made by performing a logical-and operation on a boolean filter that is True when a signal arrives on a special channel (the special parameter = 1) and a boolean filter that is True when a signal arrives on the channel where the entanglement markers arrive (channel = 4). Using this filter the number of entanglement markers in a dataset can be determined. When there are no entanglement markers in the dataset, the program continues to the next dataset as shown in Figure \ref{fig:analysis_overview}.
+
+If the number of entanglement in a dataset is nonzero, the data corresponding to these entanglement data is retrieved. First the sync numbers corresponding to the marked events have to be determined. Because of the size of the dataset, loading the sync number dataset and applying the Boolean filter is too memory-consuming and too slow such that we have to work around this. However, the use of HDF5 files allows us to access specific parts of a dataset without loading the dataset into the memory of the PC. Therefore, the sync numbers can be extracted fast when the indices of the marked events are known. The indices of the marked are found by applying a Python function (should I write numpy where ?????? )on the Boolean filter for the marked events. Now we loop over the these indices and extract the sync numbers. Note that this data extraction is fast as long as the number of marked events is low. 
+
+The entanglement markers are generated at the BS-station and are subsequently sent to the two LT-laboratories inducing a delay in the marker arrival time. The time difference between the generation and detection of the marker is of such magnitude that the marker doesn't arrive within the range of its own sync number. If we describe this by means of Figure \ref{fig:signal_overview}, this would mean that an entanglement marker is created somewhere between $t_a$ and $t_b$ but that it arrives at the TimeHarp of the LT-laboratory between $t_b$ and $t_c$. At the end of the 250 measurements runs, as described in Chapter \ref{expset}, the time between $t_a$ and $t_b$ is much larger than its standard interval such that the marker arrives within the interval wherein it is created. Computationally we handle this by also extracting the sync time for every marked event. When the sync time is smaller than 15 $\mu s$, the sync number that is saved is one lower than the actual sync number the marker arrived on. If it is larger than 15 $\mu s$, the sync number that is save is the sync number the marker arrived on. 
+
+Now that it is clear which sync numbers are of interest; we define the sync numbers that need to be saved by making a list that  for every sync number $\alpha$ contains: $\left(\alpha - 1\right)$, $\alpha$ and $\left(\alpha + 1\right)$. These numbers are used to define the indices of the dataset that have to be saved in the new file. Since the complete sync number dataset is larger in terms of memory usage than the complete special or channel dataset, it is very slow to load the complete data set and find the indices of the sync numbers we want to save. Therefore, we split up the dataset in ten parts and check if the sync numbers we want to save are in this subset. If so the indices are saved. Splitting up the dataset in usable subsets again is an advantage of using HDF5 files.  Note that the specialized Python python command that looks if and where a value is in a data set, can only look for one value at a time meaning that we have to loop over all the sync number we want to save. This results in slower data processing when there are many sync numbers with an entanglement marker. 
+
+Now that all indices of the data we want to save are defined, the data is extracted by looping over the indices and extracting and stacking the data in new arrays. 
+
+These arrays are sent back to the arrays that finally will be saved. Once the last dataset is analyzed the arrays are saved in a separate HDF5 files as datasets with exactly the same structure and data type as in the main file (sync time, absolute time, sync number, channel and special).
+
+In Figure \ref{fig:analysis_overview} a block that states abort measurement is shown. This block follows on a check if a the first sync number that has to be saved equals the first sync number in a dataset or if the last sync number that has to be saved equals the last number in a dataset. This is important because for the first or last sync number in a dataset there are probably events with the same sync number respectively in the end of the dataset before or in the beginning of the dataset after. For all datasets analyzed up to the point this report is written this has not occurred but when it occurs extra code has to be added to solve this. An example of such code can be seen in Section XXXXXrefXXXXXXX.
+
+\color{tudelft-cyan}
+\subsection{Creating the a table with all necessary information}
+\color{black}
+
+Now that the LT files are processed into small manageable files with useful information,  they can be analyzed to extract the results of the fast Single Shot Read-Out (SSRO). This analysis can be combined with the data from the BS-station to create one table with all interesting information of the entanglement events. First, we will explain how the fast SSRO analysis works and and then we will explain how this data is combined with the data from the BS-station. \\*
+
+{\raggedright{\color{tudelft-cyan}\textbf{Fast SSRO analysis}\color{black}\\*}}
+The fast-SSRO analysis results in a table with: the sync number, the absolute arrival time of the entanglement marker, the number of photons that arrive within a specified read out window, a parameter that shows if a random number is generated, the random number, the sync time of the random number and the sync times of the photons that have arrived. The table is created in such a way that there is space for the arrival time of 24 photons. Not that only events with entanglement markers are taken into account for the fast-SSRO analysis.
+
+The sync numbers of the marked entanglement events are found exactly in the same manner as described in Section \ref{large_data_files}. Since the files that are used are much smaller a different process may be more suitable. However, the existing code works on these files and is quick enough such that it was inefficient to write a different script. 
+
+With these sync numbers the absolute arrival time of the markers is extracted. When the sync time, $t_{sync}$, corresponding to a sync number, $\alpha$, is larger than 15 $\mu s$ the absolute time of $\alpha$ is taken to be the absolute arrival time of the entanglement marker. If this is not the case and $t_{sync}\left( \alpha + 1 \right) \leq 15 \: \mu s $, the absolute arrival time of sync number $\alpha + 1$ is taken to be the absolute arrival time of the entanglement marker. 
+
+Boolean filters are defined for every photon event, every event in a specified read out window. The boolean filters are created by using the special, channel and sync time datasets in combination with logical-and and comparison operations. These boolean filters are combined to define the number of photons in a readout window and to extract the sync times of the photons in this read out window. How the read out window is defined is described in section \ref{definitions}. The filters described above are created for the entire dataset and the sync number specific data is extracted by combining them with a boolean filter for one specific sync number. 
+
+The random number data is extracted in a similar way. Three boolean filters are created for the entire dataset. One boolean filter is True when a signal has arrived that shows that a new random number is generated, see Figure \ref{fig:SSRO_data_gath} for exact definition. The other boolean filters are True when an event arrives either on marker channel 1 or 2. Using the first boolean filter in combination with a boolean filter for on specific sync number, we define a parameter that is 1 if a new random number is generated for a specific sync number and is 0 otherwise. Then we use the two boolean filters indicating if an event has arrived on marker channel 1 or 2, to define that the random is 0 or 1 respectively. The sync time of the random number is defined as the sync time of the signal that arrives when a new random number is generated. \\*
+
+{\raggedright{\color{tudelft-cyan}\textbf{Final data combination}\color{black}\\*}}
+
+
+
+
+
+
+\color{tudelft-cyan}
+\section{Filtering data without opening any loopholes}
+\color{black}
+
+
+that give: the sync number of the photon arriving at the BS-station, the sync time of the first photon arriving at the BS-station, the sync time of the second photon arriving at the BS-station, the channel of the first photon, the channel of the second photon, a marker
+
+\color{tudelft-cyan}
+\section{Defining the correct read out windows and filtering settings}
+\label{definitions}
+\color{black}
+
+\color{tudelft-cyan}
+\section{Random Numbers used in the experiment}
+\label{RN_data_used}
+\color{black}
